@@ -1,0 +1,4 @@
+frontend/.firebase
+frontend/.firebaserc
+frontend/firebase.json
+deploy.sh

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixCaption — AI Photo Captioning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grain"></div>
+
+  <!-- About Modal -->
+
+<div class="modal-overlay hidden" id="about-modal">
+  <div class="modal">
+    <button class="modal-close" id="modal-close" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+<div class="modal-eyebrow">◈ About</div>
+<h2 class="modal-title">PixCaption</h2>
+<p class="modal-tagline">
+  Turn images into meaningful words — instantly.  
+  Powered by AI, designed for creators.
+</p>
+
+<div class="modal-divider"></div>
+
+<div class="modal-section">
+  <h3 class="modal-section-title">What it does</h3>
+  <p>
+    PixCaption transforms your photos into expressive, ready-to-use captions.
+    Whether you're posting on social media, writing content, or organizing visuals,
+    it helps you describe images with clarity, creativity, and context — in seconds.
+  </p>
+  <p>
+    Instead of generic captions, you get multiple styles tailored for different uses:
+    <strong>descriptive</strong>, <strong>social</strong>, and <strong>minimal</strong>.
+  </p>
+</div>
+
+<div class="modal-divider"></div>
+
+<div class="modal-section">
+  <h3 class="modal-section-title">How it works</h3>
+  <ol class="modal-steps">
+    <li><span class="modal-step-num">01</span> Your image is securely uploaded to <strong>Google Cloud Storage</strong>.</li>
+    <li><span class="modal-step-num">02</span> <strong>Vision AI</strong> analyzes objects, scenes, and visual context.</li>
+    <li><span class="modal-step-num">03</span> A <strong>Cloud Function</strong> processes this data into structured insights.</li>
+    <li><span class="modal-step-num">04</span> AI generates captions, hashtags, and alt-text for accessibility.</li>
+  </ol>
+</div>
+
+<div class="modal-divider"></div>
+
+<div class="modal-section">
+  <h3 class="modal-section-title">Why it’s useful</h3>
+  <ul class="modal-steps">
+    <li><span class="modal-step-num">•</span> Save time writing captions</li>
+    <li><span class="modal-step-num">•</span> Improve accessibility with alt-text</li>
+    <li><span class="modal-step-num">•</span> Generate relevant hashtags instantly</li>
+    <li><span class="modal-step-num">•</span> Get multiple caption styles in one click</li>
+  </ul>
+</div>
+
+<div class="modal-divider"></div>
+
+<div class="modal-section">
+  <h3 class="modal-section-title">Tech Stack</h3>
+  <div class="modal-tech-grid">
+    <div class="modal-tech-item">
+      <span class="modal-tech-icon">☁</span>
+      <span>Cloud Storage</span>
+    </div>
+    <div class="modal-tech-item">
+      <span class="modal-tech-icon">◈</span>
+      <span>Vision AI</span>
+    </div>
+    <div class="modal-tech-item">
+      <span class="modal-tech-icon">λ</span>
+      <span>Cloud Functions</span>
+    </div>
+    <div class="modal-tech-item">
+      <span class="modal-tech-icon">✦</span>
+      <span>Generative AI</span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-divider"></div>
+
+<p class="modal-footer-note">
+  Your images are processed securely and stored temporarily.  
+  No login required. No data is used for training.
+</p>
+
+  </div>
+</div>
+
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo-mark">◈</span>
+      <span class="logo-text">PixCaption</span>
+    </div>
+    <nav class="nav-pills">
+      <span class="pill active">Caption</span>
+      <span class="pill" id="about-pill">About</span>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="hero-eyebrow">Powered by Google Cloud Vision AI</p>
+    <h1 class="hero-title">
+      Every image<br />
+      <em>has a story</em><br />
+      to tell.
+    </h1>
+    <p class="hero-sub">Upload a photo and watch our AI craft a vivid, descriptive caption in seconds.</p>
+  </section>
+
+  <!-- Main App -->
+  <main class="app-container">
+
+    <!-- Upload Zone -->
+    <div class="upload-card" id="upload-card">
+      <div class="upload-zone" id="upload-zone">
+        <input type="file" id="file-input" accept="image/*" hidden />
+        <div class="upload-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <path d="M24 32V20M24 20L19 25M24 20L29 25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 34h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+        <p class="upload-primary">Drop your image here</p>
+        <p class="upload-secondary">or <button class="inline-btn" id="browse-btn">browse files</button></p>
+        <p class="upload-formats">JPEG · PNG · WebP · GIF · up to 10 MB</p>
+      </div>
+    </div>
+
+    <!-- Result Card (hidden initially) -->
+    <div class="result-card hidden" id="result-card">
+
+      <div class="result-layout">
+        <!-- Left: Image Preview -->
+        <div class="image-panel">
+          <div class="image-frame">
+            <img id="preview-img" src="" alt="Uploaded preview" />
+            <div class="image-overlay">
+              <button class="reset-btn" id="reset-btn">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M1 7a6 6 0 1 0 6-6 6 6 0 0 0-4.243 1.757L1 1m0 0v3m0-3h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                New Image
+              </button>
+            </div>
+          </div>
+          <div class="image-meta" id="image-meta">
+            <span id="file-name">—</span>
+            <span id="file-size">—</span>
+          </div>
+        </div>
+
+        <!-- Right: Caption Output -->
+        <div class="caption-panel">
+
+          <div class="loading-state" id="loading-state">
+            <div class="spinner">
+              <div class="spinner-ring"></div>
+              <div class="spinner-ring delay-1"></div>
+              <div class="spinner-ring delay-2"></div>
+            </div>
+            <p class="loading-text">Analyzing your image…</p>
+            <div class="loading-steps" id="loading-steps">
+              <span class="step active" id="step-upload">↑ Uploading to Cloud Storage</span>
+              <span class="step" id="step-vision">◈ Running Vision AI</span>
+              <span class="step" id="step-caption">✦ Generating caption</span>
+            </div>
+          </div>
+
+          <div class="caption-output hidden" id="caption-output">
+            
+            <div class="output-header">
+              <span class="output-label">Generated Caption</span>
+              <div class="caption-tabs" id="caption-tabs">
+                <span class="cap-tab active" data-key="descriptive">Descriptive</span>
+                <span class="cap-tab" data-key="social">Social</span>
+                <span class="cap-tab" data-key="short">Short</span>
+              </div>
+            </div>
+
+            <blockquote class="caption-text" id="caption-text"></blockquote>
+
+            <div class="meta-sections">
+              <div class="tags-section" id="hashtags-section">
+                <span class="tags-label">Hashtags</span>
+                <div class="tags" id="hashtags-container"></div>
+              </div>
+
+              <div class="tags-section" id="tags-section">
+                <span class="tags-label">Detected Labels</span>
+                <div class="tags" id="tags-container"></div>
+              </div>
+            </div>
+
+            <div class="caption-actions">
+              <button class="action-btn primary" id="copy-btn">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <rect x="1" y="4" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+                  <path d="M4 4V2.5A1.5 1.5 0 0 1 5.5 1H11.5A1.5 1.5 0 0 1 13 2.5V8.5A1.5 1.5 0 0 1 11.5 10H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+                Copy Caption
+              </button>
+              <button class="action-btn secondary" id="regenerate-btn">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M1 7a6 6 0 1 0 6-6 6 6 0 0 0-4.243 1.757L1 1m0 0v3m0-3h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Try Again
+              </button>
+            </div>
+
+            <div class="cloud-badge" id="cloud-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <span id="cloud-url-text">Stored in Google Cloud Storage</span>
+            </div>
+          </div>
+
+          <div class="error-state hidden" id="error-state">
+            <div class="error-icon">⚠</div>
+            <p class="error-title">Something went wrong</p>
+            <p class="error-msg" id="error-msg"></p>
+            <button class="action-btn secondary" id="retry-btn">Retry</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Info Strip -->
+  <section class="info-strip">
+    <div class="info-item">
+      <span class="info-num">01</span>
+      <span class="info-text">Upload any image</span>
+    </div>
+    <div class="info-divider">→</div>
+    <div class="info-item">
+      <span class="info-num">02</span>
+      <span class="info-text">Stored in Cloud Storage</span>
+    </div>
+    <div class="info-divider">→</div>
+    <div class="info-item">
+      <span class="info-num">03</span>
+      <span class="info-text">Vision AI analyzes it</span>
+    </div>
+    <div class="info-divider">→</div>
+    <div class="info-item">
+      <span class="info-num">04</span>
+      <span class="info-text">Caption is generated</span>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>Built with Google Cloud Vision · Cloud Storage · Cloud Functions</span>
+    <span class="footer-dot">·</span>
+    <span>PixCaption © 2025</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

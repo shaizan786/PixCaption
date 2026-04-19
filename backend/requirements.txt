@@ -1,0 +1,6 @@
+# Smart Photo Caption Generator — Python dependencies
+# For Google Cloud Function (Python 3.11+)
+
+functions-framework==3.*
+google-cloud-vision==3.*
+google-cloud-storage==2.*
