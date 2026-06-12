@@ -20,7 +20,7 @@ A full-stack web app that transforms any image into expressive, ready-to-use cap
 
 | Layer | Technology |
 |---|---|
-| Frontend | HTML, CSS, Vanilla JS |
+| Frontend | HTML, CSS,JS |
 | Hosting | Firebase Hosting |
 | Backend | Google Cloud Functions (Python) |
 | Image Analysis | Google Cloud Vision AI |
